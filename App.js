@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import StartCountdown from './button';
 import MyDatePicker from './datePickerComp';
 
 
@@ -10,7 +9,6 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Text>Select Date</Text>
         <MyDatePicker />
-        <StartCountdown />
       </View>
     );
   }
