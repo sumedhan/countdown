@@ -7,8 +7,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Select Date</Text>
-        <MyDatePicker />
+        <Text style={styles.text}>Select Date</Text>
+        <MyDatePicker styles={styles}/>
       </View>
     );
   }
@@ -19,8 +19,11 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F1FFC4',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
+  text: {
+    fontSize: 40,
+  }
 });

@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
 import DatePicker from 'react-native-datepicker'
 import { StyleSheet, Text, View, Button } from 'react-native';
-import StartCountdown from './button';
+import moment from "moment";
  
 export default class MyDatePicker extends Component {
   constructor(props){
     super(props)
-    this.state = {date: new Date() }
+    this.state = {
+      date: new Date(),
+      dispDays: ''
+    }
+  }
+
+  displayDaysTo = (date) => {
+    this.setState({date});
+    const dispDays = moment(date, "DD-MMM-YYYY").fromNow();
+    this.setState({dispDays})
   }
  
   render(){
@@ -22,9 +31,9 @@ export default class MyDatePicker extends Component {
         minDate={todaysDate}
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
-        onDateChange={(date) => {this.setState({date: date})}}
+        onDateChange= {this.displayDaysTo}
       />
-      <StartCountdown eventDate={this.state.date}/>
+      <Text style={this.props.styles.text}>{this.state.dispDays}</Text>
       </View>
     )
   }
