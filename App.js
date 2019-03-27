@@ -9,6 +9,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.appHeader}>Day Counter</Text>
+        <Text style={styles.appSubTitle}>A simple way to find out how many days until your event.</Text>
         <MyDatePicker/>
       </View>
     );
@@ -18,9 +19,9 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#575761',
+    backgroundColor: 'white',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
   },
   text: {
     fontSize: 40,
@@ -31,7 +32,11 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: '#FFBF46',
     margin: 10,
-  }
+  },
+  appSubTitle: {
+    fontSize: 10,
+    margin: 2,
+  },
 });
 
 

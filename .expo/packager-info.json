@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19003,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 7752,
   "expoServerNgrokUrl": "https://m2-jqd.anonymous.countdown.exp.direct",
   "packagerNgrokUrl": "https://packager.m2-jqd.anonymous.countdown.exp.direct",
-  "ngrokPid": 6722
+  "ngrokPid": 7769
 }
