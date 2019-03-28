@@ -10,25 +10,34 @@ export default class MyDatePicker extends Component {
       date: new Date(),
       displayMsg: '',
       dispDatePicker: false,
+      dateSelected: '',
     }
   }
 
-  displayDaysTo = (date) => {
+  onDateChangeHandler = (date) => {
     this.setState({date});
   }
 
   toggleDatePickerVisibility = () => {
     if(this.state.dispDatePicker) {
-      this.dateChangeHandler();
       this.setState({dispDatePicker: false})
-    } else
-    {
-      this.setState({dispDatePicker: true})
+    } else {
+      this.setState({
+        dispDatePicker: true,
+        date: new Date()
+      })
     }
   }
 
+  onConfirmHandler = () => {
+    const diffInDays = this.differenceinDays();
+    const dateSelected = `Date: ${moment(this.state.date).format("MMMM Do YYYY")}`;
+    this.textDisplay(diffInDays);
+    this.setState({dateSelected});
+    this.toggleDatePickerVisibility();
+  }
+
   textDisplay =(days) => {
-    let displayMsg = '';
     if(days > 1) {
       displayMsg = `${days} days to go!`;
     } else if (days < -1) {
@@ -37,35 +46,40 @@ export default class MyDatePicker extends Component {
       displayMsg = `Tomorrow`;
     } else if (days === -1) {
       displayMsg = 'It was yesterday';
-    } 
+    } else {
+      displayMsg = 'Today';
+    }
     this.setState({displayMsg})
   }
 
-  daysFromToday = () => {
+  differenceinDays = () => {
     const eventDate = moment(this.state.date, "DD-MMM-YYYY");
     const todayDate = moment(Date.now())
-    const dispDays = eventDate.diff(todayDate, 'days');
-    this.textDisplay(dispDays);
+    return eventDate.diff(todayDate, 'days');
   }
 
   render(){
-    const selectedDate = this.state.date ? moment(this.state.date).format("MMMM Do YYYY") : null;
+    const today =  `Today: ${moment(new Date()).format("MMMM Do YYYY")}`;
     return (
       <View style={styles.container}>
-        <Button title='Select your event date' onPress={this.toggleDatePickerVisibility} />
+        <Button title='Select your event date' onPress={this.toggleDatePickerVisibility} color="#007aff"/>
         {this.state.dispDatePicker ?
         <View>
           <DatePickerIOS
             date={this.state.date}
             mode="date"
-            onDateChange= {this.displayDaysTo}
+            onDateChange= {this.onDateChangeHandler}
             style={styles.dateInput}
-          /> 
-          <Button title='Confirm' onPress={this.toggleDatePickerVisibility} />
+          />
+          <View style={styles.buttonsContainer}>
+            <Button title='Confirm' onPress={this.onConfirmHandler} color="#4cd964"/>
+            <Button title='Cancel' onPress={this.toggleDatePickerVisibility} color="#ff3b30" />
+          </View>
         </View>
         :
         null }
-        <Text style={styles.date}>{selectedDate}</Text>
+        <Text style={styles.date}>{today}</Text>
+        <Text style={styles.date}>{this.state.dateSelected}</Text>
         <Text style={styles.output}>{this.state.displayMsg}</Text>
       </View>
     )
@@ -77,6 +91,10 @@ const styles = StyleSheet.create({
     margin: 10,
     alignItems: 'center',
     justifyContent: 'space-around',
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   output: {
     fontSize: 35,
