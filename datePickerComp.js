@@ -19,10 +19,7 @@ export default class MyDatePicker extends Component {
 
   toggleDatePickerVisibility = () => {
     if(this.state.dispDatePicker) {
-      const eventDate = moment(this.state.date, "DD-MMM-YYYY");
-      const todayDate = moment(Date.now())
-      const dispDays = eventDate.diff(todayDate, 'days');
-      this.textDisplay(dispDays);
+      this.dateChangeHandler();
       this.setState({dispDatePicker: false})
     } else
     {
@@ -33,26 +30,29 @@ export default class MyDatePicker extends Component {
   textDisplay =(days) => {
     let displayMsg = '';
     if(days > 1) {
-      displayMsg = `There are ${days} days to go!`;
+      displayMsg = `${days} days to go!`;
     } else if (days < -1) {
-      displayMsg = `It was ${Math.abs(days)} days ago.`;
+      displayMsg = `${Math.abs(days)} days ago.`;
     } else if (days === 1) {
-      displayMsg = `It is tomorrow`;
+      displayMsg = `Tomorrow`;
     } else if (days === -1) {
       displayMsg = 'It was yesterday';
-    } else if(days === 0) {
-      displayMsg = 'Your wait is over. It is today!';
-    }
+    } 
     this.setState({displayMsg})
   }
 
+  daysFromToday = () => {
+    const eventDate = moment(this.state.date, "DD-MMM-YYYY");
+    const todayDate = moment(Date.now())
+    const dispDays = eventDate.diff(todayDate, 'days');
+    this.textDisplay(dispDays);
+  }
 
- 
   render(){
-    const todaysDate= new Date();
+    const selectedDate = this.state.date ? moment(this.state.date).format("MMMM Do YYYY") : null;
     return (
       <View style={styles.container}>
-        <Button title='Select your event date' onPress={this.toggleDatePickerVisibility} color= "#EEC643"/>
+        <Button title='Select your event date' onPress={this.toggleDatePickerVisibility} />
         {this.state.dispDatePicker ?
         <View>
           <DatePickerIOS
@@ -65,7 +65,8 @@ export default class MyDatePicker extends Component {
         </View>
         :
         null }
-        <Text style={styles.text}>{this.state.displayMsg}</Text>
+        <Text style={styles.date}>{selectedDate}</Text>
+        <Text style={styles.output}>{this.state.displayMsg}</Text>
       </View>
     )
   }
@@ -77,10 +78,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-  text: {
-    fontSize: 20,
-    color: 'black',
-    margin: 10,
+  output: {
+    fontSize: 35,
+    color: '#320D6D',
+    margin: 30,
   },
   dateInput: {
     width: 300,

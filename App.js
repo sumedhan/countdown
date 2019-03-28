@@ -8,8 +8,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.appHeader}>Day Counter</Text>
-        <Text style={styles.appSubTitle}>A simple way to find out how many days until your event.</Text>
+        <Text style={styles.appHeader}>Countdown</Text>
+        <Text style={styles.appSubTitle}>A simple way to find out how many days until or ago.</Text>
         <MyDatePicker/>
       </View>
     );
