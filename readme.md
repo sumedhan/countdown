@@ -8,10 +8,13 @@ This is my first project ever with React Native.
 
 # Screenshots
 
-![landing](screenshots/landing.png | width=200)
+Landing Page
+![landing](screenshots/landing.png)
 
+On touching "Select your event date"
 ![select](screenshots/select.png)
 
+On confirming the selected date"
 ![result](screenshots/result.png)
 
 
