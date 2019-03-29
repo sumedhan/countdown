@@ -8,7 +8,7 @@ This is my first project ever with React Native.
 
 # Screenshots
 
-![landing](screenshots/landing.png)
+![landing](screenshots/landing.png | width=200)
 
 ![select](screenshots/select.png)
 
